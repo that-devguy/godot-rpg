@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://dtye8ks1mep3j"]
+[gd_scene load_steps=91 format=3 uid="uid://dtye8ks1mep3j"]
 
 [ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_br14n"]
 [ext_resource type="Texture2D" uid="uid://dfpjr52jtknud" path="res://assets/characters/player/player_attack_1h.png" id="2_88i4m"]
@@ -656,11 +656,19 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_da6tu"]
+radius = 4.58524
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_br14n")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fhmw1")
 animation = &"idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.875)
+scale = Vector2(0.955, 0.405)
+shape = SubResource("CircleShape2D_da6tu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
