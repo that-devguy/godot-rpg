@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7tpfbe1iues4"
-path="res://.godot/imported/player_attack_1h_sword.png-3dbbd868931dd7a5c837eec6a09ab92f.ctex"
+uid="uid://bmwvkdraxiq7l"
+path="res://.godot/imported/demo_tile_sheet.png-7be3e9a8e315726871f259a06e40b911.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/player_attack_1h_sword.png"
-dest_files=["res://.godot/imported/player_attack_1h_sword.png-3dbbd868931dd7a5c837eec6a09ab92f.ctex"]
+source_file="res://assets/tilesets/demo_tile_sheet.png"
+dest_files=["res://.godot/imported/demo_tile_sheet.png-7be3e9a8e315726871f259a06e40b911.ctex"]
 
 [params]
 
