@@ -1,9 +1,10 @@
-[gd_scene load_steps=91 format=3 uid="uid://dtye8ks1mep3j"]
+[gd_scene load_steps=92 format=3 uid="uid://dtye8ks1mep3j"]
 
 [ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_br14n"]
 [ext_resource type="Texture2D" uid="uid://dfpjr52jtknud" path="res://assets/characters/player/player_attack_1h.png" id="2_88i4m"]
 [ext_resource type="Texture2D" uid="uid://cmwcaatkne8tv" path="res://assets/characters/player/player_idle.png" id="3_u2chh"]
 [ext_resource type="Texture2D" uid="uid://ckolim6fkljw" path="res://assets/characters/player/player_walk.png" id="4_c1gmm"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_eturk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o4ea1"]
 atlas = ExtResource("2_88i4m")
@@ -673,3 +674,8 @@ scale = Vector2(0.955, 0.405)
 shape = SubResource("CircleShape2D_da6tu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("5_eturk")
