@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://4psu8lvt6uux"]
+[gd_scene load_steps=8 format=4 uid="uid://4psu8lvt6uux"]
 
 [ext_resource type="TileSet" uid="uid://6trm3ijkofyj" path="res://assets/tilesets/demo_tileset.tres" id="2_741rj"]
 [ext_resource type="PackedScene" uid="uid://dtye8ks1mep3j" path="res://assets/characters/player/player.tscn" id="2_hgsgl"]
+[ext_resource type="PackedScene" uid="uid://bmis508e2ci8p" path="res://assets/characters/enemies/slime/slime.tscn" id="3_sv5bk"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_thicu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_shvop"]
 
@@ -41,9 +42,13 @@ z_index = 1
 position = Vector2(247, 146)
 collision_mask = 2
 
+[node name="slime" parent="test_map" instance=ExtResource("3_sv5bk")]
+z_index = 1
+position = Vector2(57, 76)
+
 [node name="PhantomCamera2D" type="Node2D" parent="test_map" node_paths=PackedStringArray("follow_target")]
 position = Vector2(247, 146)
-scale = Vector2(0.90242, 1.15947)
+scale = Vector2(0.90242, 1.18341)
 script = ExtResource("3_thicu")
 follow_mode = 5
 follow_target = NodePath("../player")
@@ -56,6 +61,7 @@ limit_target = NodePath("../../camera_bounds/CollisionShape2D")
 [node name="camera_bounds" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="camera_bounds"]
+visible = false
 position = Vector2(272, 168)
 shape = SubResource("RectangleShape2D_l6xjw")
 disabled = true
