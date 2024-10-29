@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://p252888fkj0u"]
+
+[ext_resource type="PackedScene" uid="uid://d2favthuwt4xt" path="res://assets/entities/entity_base.tscn" id="1_p83dr"]
+[ext_resource type="Script" path="res://scripts/entities/player.gd" id="2_46fw2"]
+[ext_resource type="SpriteFrames" uid="uid://bgovl4xk8hxlf" path="res://assets/entities/player/player_frames.tres" id="3_1yxg4"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_eturk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5yjrn"]
+radius = 5.2356
+
+[node name="player" instance=ExtResource("1_p83dr")]
+collision_layer = 3
+script = ExtResource("2_46fw2")
+speed = 60
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = ExtResource("3_1yxg4")
+animation = &"idle_down"
+offset = Vector2(0, -6.15)
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2(0.955, 0.405)
+shape = SubResource("CircleShape2D_5yjrn")
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" index="0"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("5_eturk")

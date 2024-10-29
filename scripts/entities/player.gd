@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends "res://scripts/entities/entity_base.gd"
 
 # Variables
 @export var speed = 60

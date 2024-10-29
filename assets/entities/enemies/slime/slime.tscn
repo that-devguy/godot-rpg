@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=3 uid="uid://bmis508e2ci8p"]
 
-[ext_resource type="Texture2D" uid="uid://cx817r6gjgtam" path="res://assets/characters/enemies/slime/demo_slime.png" id="1_doban"]
-[ext_resource type="Script" path="res://assets/characters/enemies/slime/slime.gd" id="1_vudm2"]
+[ext_resource type="Texture2D" uid="uid://cx817r6gjgtam" path="res://assets/entities/enemies/slime/demo_slime.png" id="1_doban"]
+[ext_resource type="Script" path="res://assets/entities/enemies/slime/slime.gd" id="1_vudm2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bt8vq"]
 atlas = ExtResource("1_doban")
@@ -283,7 +283,7 @@ script = ExtResource("1_vudm2")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_mhr06")
 animation = &"idle_down"
-frame_progress = 0.626944
+frame_progress = 0.799097
 
 [node name="detection_zone" type="Area2D" parent="."]
 collision_layer = 2
