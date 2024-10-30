@@ -1,16 +1,16 @@
 extends "res://scripts/entities/entity_base.gd"
 
 # Variables
-@export var speed = 60
 var is_attacking = false
 var current_dir = ""
+var is_dead = false
 
 func _ready():
-	# Sets the initial idle animation when the scene loads
 	$AnimatedSprite2D.play("idle_down")
 
 func _physics_process(_delta):
-	player_movement(_delta)
+	if not is_dead:  # Prevent player movement if dead
+		player_movement(_delta)
 
 # Handles player movement and direction
 func player_movement(_delta):
@@ -41,7 +41,7 @@ func player_movement(_delta):
 	
 	move_and_slide()
 
-# Handles player anims based on movement and direction
+# Handles player animations based on movement and direction
 func play_anim(movement):
 	var dir = current_dir
 	var anim = $AnimatedSprite2D
@@ -66,3 +66,28 @@ func play_anim(movement):
 			anim.play("walk_right")
 		elif movement == 0:
 			anim.play("idle_right")
+
+func _on_hp_changed():
+	var dir = current_dir
+	var anim = $AnimatedSprite2D
+	
+	if dir == "up":
+		anim.play("damage_up")
+	if dir == "down":
+		anim.play("damage_down")
+	if dir == "left":
+		anim.play("damage_left")
+	if dir == "right":
+		anim.play("damage_right")
+
+func _on_died():
+	if not is_dead:  # Prevent multiple triggers
+		is_dead = true
+		$AnimatedSprite2D.play("death")
+		velocity = Vector2.ZERO
+		print("you died")
+
+func _on_animation_finished(anim_name):
+	if anim_name == "death":
+		# Handle what happens after death animation
+		queue_free()

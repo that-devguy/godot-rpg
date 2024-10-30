@@ -13,12 +13,10 @@
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("2_46fw2")
-speed = 60
-defense = 5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = ExtResource("3_1yxg4")
-animation = &"walk_down"
+animation = &"damage_up"
 offset = Vector2(0, -6.15)
 
 [node name="hurt_box" parent="." index="1"]
@@ -42,5 +40,8 @@ position = Vector2(0, -0.31)
 rotation = 1.5708
 scale = Vector2(0.235, 0.29)
 shape = SubResource("CapsuleShape2D_d630q")
+
+[connection signal="died" from="." to="." method="_on_died"]
+[connection signal="hp_changed" from="." to="." method="_on_hp_changed"]
 
 [editable path="hurt_box"]
