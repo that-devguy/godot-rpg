@@ -9,11 +9,11 @@ func _ready():
 	# Sets the initial idle animation when the scene loads
 	$AnimatedSprite2D.play("idle_down")
 
-func _physics_process(delta):
-	player_movement(delta)
+func _physics_process(_delta):
+	player_movement(_delta)
 
 # Handles player movement and direction
-func player_movement(delta):
+func player_movement(_delta):
 	if Input.is_action_pressed("ui_up"):
 		current_dir = "up"
 		play_anim(1)

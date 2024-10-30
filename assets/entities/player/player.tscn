@@ -1,26 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://p252888fkj0u"]
+[gd_scene load_steps=7 format=3 uid="uid://p252888fkj0u"]
 
 [ext_resource type="PackedScene" uid="uid://d2favthuwt4xt" path="res://assets/entities/entity_base.tscn" id="1_p83dr"]
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="2_46fw2"]
 [ext_resource type="SpriteFrames" uid="uid://bgovl4xk8hxlf" path="res://assets/entities/player/player_frames.tres" id="3_1yxg4"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_eturk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5yjrn"]
-radius = 5.2356
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yyyb4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d630q"]
 
 [node name="player" instance=ExtResource("1_p83dr")]
-collision_layer = 3
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("2_46fw2")
 speed = 60
+defense = 5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = ExtResource("3_1yxg4")
-animation = &"idle_down"
+animation = &"walk_down"
 offset = Vector2(0, -6.15)
 
-[node name="CollisionShape2D" parent="." index="1"]
-scale = Vector2(0.955, 0.405)
-shape = SubResource("CircleShape2D_5yjrn")
+[node name="hurt_box" parent="." index="1"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="hurt_box" index="0"]
+position = Vector2(0, -5.66)
+scale = Vector2(0.475, 0.475)
+shape = SubResource("CapsuleShape2D_yyyb4")
 
 [node name="Camera2D" type="Camera2D" parent="." index="2"]
 
@@ -28,3 +36,11 @@ shape = SubResource("CircleShape2D_5yjrn")
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("5_eturk")
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, -0.31)
+rotation = 1.5708
+scale = Vector2(0.235, 0.29)
+shape = SubResource("CapsuleShape2D_d630q")
+
+[editable path="hurt_box"]

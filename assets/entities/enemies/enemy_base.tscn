@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bktk8ajkntylp"]
-
-[ext_resource type="PackedScene" uid="uid://d2favthuwt4xt" path="res://assets/entities/entity_base.tscn" id="1_7upv4"]
-
-[node name="enemy_base" instance=ExtResource("1_7upv4")]
