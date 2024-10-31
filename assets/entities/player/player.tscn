@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://xu3diojofdex"]
+[gd_scene load_steps=8 format=3 uid="uid://xu3diojofdex"]
 
-[ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_3n50m"]
+[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3n50m"]
 [ext_resource type="SpriteFrames" uid="uid://bgovl4xk8hxlf" path="res://assets/entities/player/player_frames.tres" id="3_1yxg4"]
+[ext_resource type="Script" path="res://scripts/entities/player/player_state_machine.gd" id="4_yk3g3"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_eturk"]
+[ext_resource type="Script" path="res://scripts/entities/player/state_idle.gd" id="5_xqeuy"]
+[ext_resource type="Script" path="res://scripts/entities/player/state_walk.gd" id="6_4s00m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_obmym"]
 radius = 3.0
@@ -33,3 +36,12 @@ shape = SubResource("CapsuleShape2D_obmym")
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("5_eturk")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_yk3g3")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_xqeuy")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("6_4s00m")

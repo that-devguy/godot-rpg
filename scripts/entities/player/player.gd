@@ -1,29 +1,26 @@
 class_name Player extends CharacterBody2D
 
+
 # Variables
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction: Vector2 = Vector2.ZERO
-var move_speed: float = 60
-var state : String = "idle"
 
 @onready var anim : AnimatedSprite2D = $AnimatedSprite2D
+@onready var state_machine : PlayerStateMachine = $StateMachine
 
 func _ready():
-	pass
+	state_machine.Initialize(self)
 
-func _process(_delta):
+
+func _process(_delta: float) -> void:
 	# Handles player input and updates direction for movement
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	
-	velocity = direction * move_speed
-	
-	# Updates animation if either state or direction has changed
-	if SetState() == true || SetDirection() == true:
-		UpdateAnim()
 
-func _physics_process(delta):
+
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
+
 
 # Checks if the direction has changed and updates the cardinal direction if needed
 func SetDirection() -> bool:
@@ -43,17 +40,11 @@ func SetDirection() -> bool:
 	cardinal_direction = new_dir
 	return true
 
-# Determines if the state should change based on player movement
-func SetState() -> bool:
-	var new_state : String = "idle" if direction == Vector2.ZERO else "walk"
-	if new_state == state:
-		return false
-	state = new_state
-	return true
 
 # Updates the animation based on the current state and facing direction
-func UpdateAnim() -> void:
+func UpdateAnim(state: String) -> void:
 	anim.play(state + "_" + AnimDirection())
+
 
 # Determines the animation direction string based on the cardinal direction
 func AnimDirection() -> String:
