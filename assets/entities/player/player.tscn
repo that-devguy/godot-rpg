@@ -1,47 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://p252888fkj0u"]
+[gd_scene load_steps=5 format=3 uid="uid://xu3diojofdex"]
 
-[ext_resource type="PackedScene" uid="uid://d2favthuwt4xt" path="res://assets/entities/entity_base.tscn" id="1_p83dr"]
-[ext_resource type="Script" path="res://scripts/entities/player.gd" id="2_46fw2"]
+[ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_3n50m"]
 [ext_resource type="SpriteFrames" uid="uid://bgovl4xk8hxlf" path="res://assets/entities/player/player_frames.tres" id="3_1yxg4"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_eturk"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yyyb4"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_obmym"]
+radius = 3.0
+height = 6.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d630q"]
-
-[node name="player" instance=ExtResource("1_p83dr")]
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("2_46fw2")
+script = ExtResource("1_3n50m")
 
-[node name="AnimatedSprite2D" parent="." index="0"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_1yxg4")
-animation = &"damage_up"
-offset = Vector2(0, -6.15)
+animation = &"1h_attack_down"
+frame = 8
+frame_progress = 1.0
+offset = Vector2(0, -6)
 
-[node name="hurt_box" parent="." index="1"]
-collision_layer = 2
-collision_mask = 4
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_obmym")
 
-[node name="CollisionShape2D" parent="hurt_box" index="0"]
-position = Vector2(0, -5.66)
-scale = Vector2(0.475, 0.475)
-shape = SubResource("CapsuleShape2D_yyyb4")
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-
-[node name="PhantomCameraHost" type="Node" parent="Camera2D" index="0"]
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("5_eturk")
-
-[node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0, -0.31)
-rotation = 1.5708
-scale = Vector2(0.235, 0.29)
-shape = SubResource("CapsuleShape2D_d630q")
-
-[connection signal="died" from="." to="." method="_on_died"]
-[connection signal="hp_changed" from="." to="." method="_on_hp_changed"]
-
-[editable path="hurt_box"]

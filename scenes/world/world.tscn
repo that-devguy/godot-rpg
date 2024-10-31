@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://4psu8lvt6uux"]
+[gd_scene load_steps=7 format=4 uid="uid://4psu8lvt6uux"]
 
 [ext_resource type="TileSet" uid="uid://6trm3ijkofyj" path="res://assets/tilesets/demo_tileset.tres" id="2_741rj"]
-[ext_resource type="PackedScene" uid="uid://p252888fkj0u" path="res://assets/entities/player/player.tscn" id="2_hgsgl"]
-[ext_resource type="PackedScene" uid="uid://co27m1ed8ga1r" path="res://assets/entities/enemies/bat/bat.tscn" id="2_v840r"]
+[ext_resource type="PackedScene" uid="uid://xu3diojofdex" path="res://assets/entities/player/player.tscn" id="2_hgsgl"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_thicu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_shvop"]
 
@@ -37,16 +36,11 @@ position = Vector2(80, 64)
 tile_map_data = PackedByteArray("AAD+//7/AAAFAAIAAAAUAP//AAAFAAIAAAARAAgAAAAFAAIAAAAGAAYAAAAFAAIAAAAOAA4AAAAFAAIAAAAHAAUAAAAFAAoAAAAIAAYAAAAFAAoAAAARAAMAAAAFAAoAAAAEAP3/AAAHAAAAAAAMAAAAAAAHAAAAAAAOAAoAAAAHAAAAAAABAAsAAAAHAAAAAAAXAAsAAAAHAAAAAAAZAAQAAAAHAAAAAAANAAwAAAAHAAMAAAAWAAwAAAAHAAMAAAAXAAUAAAAHAAMAAAAaAAYAAAAHAAMAAAAXAP3/AAAHAAMAAAATAP3/AAAHAAMAAAAOAAAAAAAHAAMAAAABAAUAAAAHAAMAAAACAP7/AAAHAAMAAAD8/w4AAAAHAAMAAAAHAA4AAAAHAAMAAAA=")
 tile_set = ExtResource("2_741rj")
 
-[node name="bat" parent="test_map" instance=ExtResource("2_v840r")]
-z_index = 1
-position = Vector2(142, 84)
-
 [node name="player" parent="test_map" instance=ExtResource("2_hgsgl")]
-z_index = 1
-position = Vector2(265, 146)
+position = Vector2(258, 161)
 
 [node name="PhantomCamera2D" type="Node2D" parent="test_map" node_paths=PackedStringArray("follow_target")]
-position = Vector2(265, 146)
+position = Vector2(258, 161)
 scale = Vector2(0.90242, 1.18341)
 script = ExtResource("3_thicu")
 follow_mode = 5
