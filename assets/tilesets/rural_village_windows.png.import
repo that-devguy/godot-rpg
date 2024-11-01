@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmwvkdraxiq7l"
-path="res://.godot/imported/demo_tile_sheet.png-7be3e9a8e315726871f259a06e40b911.ctex"
+uid="uid://b4ih16taivm4q"
+path="res://.godot/imported/rural_village_windows.png-5057ea9779d23a92886eef00e2e753c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/demo_tile_sheet.png"
-dest_files=["res://.godot/imported/demo_tile_sheet.png-7be3e9a8e315726871f259a06e40b911.ctex"]
+source_file="res://assets/tilesets/rural_village_windows.png"
+dest_files=["res://.godot/imported/rural_village_windows.png-5057ea9779d23a92886eef00e2e753c1.ctex"]
 
 [params]
 
