@@ -14,8 +14,10 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	# Handles player input and updates direction for movement
-	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	direction = Vector2(
+		Input.get_axis("ui_left", "ui_right"),
+		Input.get_axis("ui_up", "ui_down")
+	).normalized()
 
 
 func _physics_process(_delta: float) -> void:
