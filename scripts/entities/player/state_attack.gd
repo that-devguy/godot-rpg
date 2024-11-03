@@ -1,15 +1,17 @@
-class_name State_Walk extends State
+class_name State_Attack extends State
 
 
-@export var move_speed : float = 60.0
+var attacking : bool = false
 
+@onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
-@onready var attack: State = $"../Attack"
 
 
 # What happens when the player enters this State
 func Enter() -> void:
-	player.UpdateAnim("walk")
+	player.UpdateAnim("1h_attack")
+	_on_animated_sprite_2d_animation_finished()
+	attacking = true
 	pass
 
 
@@ -20,14 +22,13 @@ func Exit() -> void:
 
 # What happens during the _process update in this State
 func Process(_delta : float) -> State:
-	if player.direction == Vector2.ZERO:
-		return idle
+	player.velocity = Vector2.ZERO
 	
-	player.velocity = player.direction * move_speed
-	
-	if player.SetDirection():
-		player.UpdateAnim("walk")
-	
+	if attacking == false:
+		if player.direction == Vector2.ZERO:
+			return idle
+		else:
+			return walk
 	return null 
 
 
@@ -38,6 +39,9 @@ func Physics(_delta : float) -> State:
 
 # What happens with input events in this State
 func HandleInput(_event: InputEvent) -> State:
-	if _event.is_action_pressed("attack"):
-		return attack
 	return null
+
+
+# Resets attacking to false once the attacking animation has finished
+func _on_animated_sprite_2d_animation_finished() -> void:
+	attacking = false
