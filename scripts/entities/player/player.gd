@@ -8,6 +8,7 @@ var direction: Vector2 = Vector2.ZERO
 @onready var anim : AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine : PlayerStateMachine = $StateMachine
 
+
 func _ready():
 	state_machine.Initialize(self)
 
@@ -52,7 +53,7 @@ func UpdateAnim(state: String) -> void:
 func AnimDirection() -> String:
 	var mouse_position = get_global_mouse_position()
 	var direction_to_mouse = (mouse_position - global_position).normalized()
-
+	
 	if abs(direction_to_mouse.x) > abs(direction_to_mouse.y):
 		if direction_to_mouse.x > 0:
 			return "right"

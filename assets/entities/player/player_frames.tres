@@ -558,7 +558,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"1h_attack_down",
-"speed": 16.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -590,7 +590,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"1h_attack_left",
-"speed": 16.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -622,7 +622,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"1h_attack_right",
-"speed": 16.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -654,7 +654,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"1h_attack_up",
-"speed": 16.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,

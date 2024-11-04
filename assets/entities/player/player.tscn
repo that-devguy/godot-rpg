@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://xu3diojofdex"]
+[gd_scene load_steps=12 format=3 uid="uid://xu3diojofdex"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3n50m"]
 [ext_resource type="SpriteFrames" uid="uid://bgovl4xk8hxlf" path="res://assets/entities/player/player_frames.tres" id="3_1yxg4"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://scripts/entities/player/state_idle.gd" id="5_xqeuy"]
 [ext_resource type="Script" path="res://scripts/entities/player/state_walk.gd" id="6_4s00m"]
 [ext_resource type="Script" path="res://scripts/entities/player/state_attack.gd" id="7_5wppo"]
+[ext_resource type="PackedScene" uid="uid://cafs78pnjlt54" path="res://assets/overlap/hurt_box/hurt_box.tscn" id="9_6hkal"]
+[ext_resource type="Script" path="res://scripts/entities/player/player_interactions_host.gd" id="9_ukjw8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_obmym"]
 radius = 3.0
@@ -25,14 +27,14 @@ script = ExtResource("1_3n50m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_1yxg4")
 animation = &"1h_attack_up"
-frame = 8
-frame_progress = 1.0
 offset = Vector2(0, -6)
 
 [node name="WeaponAnims" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
 visible = false
 sprite_frames = ExtResource("3_qgwd4")
 animation = &"1h_sword_attack_up"
+frame = 8
+frame_progress = 1.0
 offset = Vector2(0, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -59,6 +61,17 @@ script = ExtResource("6_4s00m")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("7_5wppo")
+
+[node name="Interactions" type="Node2D" parent="."]
+script = ExtResource("9_ukjw8")
+
+[node name="HurtBox" parent="Interactions" instance=ExtResource("9_6hkal")]
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Interactions/HurtBox"]
+scale = Vector2(0.801724, 0.801724)
+polygon = PackedVector2Array(-28.6882, 0, 28.6882, 0, 28, -9, 25, -16, 21, -22, 14, -27, 8, -29, 0, -30, -8, -29, -15, -26, -21, -21, -26, -15, -28, -8)
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="StateMachine/Attack" method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Attack" method="_on_animated_sprite_2d_animation_finished"]
