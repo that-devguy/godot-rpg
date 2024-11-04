@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://xu3diojofdex"]
+[gd_scene load_steps=10 format=3 uid="uid://xu3diojofdex"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3n50m"]
 [ext_resource type="SpriteFrames" uid="uid://bgovl4xk8hxlf" path="res://assets/entities/player/player_frames.tres" id="3_1yxg4"]
+[ext_resource type="SpriteFrames" uid="uid://e2boasprcxg4" path="res://assets/entities/player/weapon_attack_anim.tres" id="3_qgwd4"]
 [ext_resource type="Script" path="res://scripts/entities/player/player_state_machine.gd" id="4_yk3g3"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_eturk"]
 [ext_resource type="Script" path="res://scripts/entities/player/state_idle.gd" id="5_xqeuy"]
@@ -24,6 +25,14 @@ script = ExtResource("1_3n50m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_1yxg4")
 animation = &"1h_attack_up"
+frame = 8
+frame_progress = 1.0
+offset = Vector2(0, -6)
+
+[node name="WeaponAnims" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+visible = false
+sprite_frames = ExtResource("3_qgwd4")
+animation = &"1h_sword_attack_up"
 offset = Vector2(0, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -51,4 +60,6 @@ script = ExtResource("6_4s00m")
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("7_5wppo")
 
+[connection signal="animation_changed" from="AnimatedSprite2D" to="StateMachine/Attack" method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Attack" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D/WeaponAnims" to="StateMachine/Attack" method="_on_weapon_anims_animation_finished"]

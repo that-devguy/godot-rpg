@@ -3,6 +3,10 @@ class_name State_Attack extends State
 
 var attacking : bool = false
 
+@export_range(1,20,0.5) var decelerate_speed : float = 5.0
+
+@onready var weapon_anims: AnimatedSprite2D = $"../../AnimatedSprite2D/WeaponAnims"
+
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
 
@@ -10,8 +14,10 @@ var attacking : bool = false
 # What happens when the player enters this State
 func Enter() -> void:
 	player.UpdateAnim("1h_attack")
+	weapon_anims.play("1h_sword_attack_" + player.AnimDirection())
 	_on_animated_sprite_2d_animation_finished()
 	attacking = true
+	ToggleWeapon()
 	pass
 
 
@@ -22,7 +28,7 @@ func Exit() -> void:
 
 # What happens during the _process update in this State
 func Process(_delta : float) -> State:
-	player.velocity = Vector2.ZERO
+	player.velocity -= player.velocity * decelerate_speed * _delta
 	
 	if attacking == false:
 		if player.direction == Vector2.ZERO:
@@ -45,3 +51,8 @@ func HandleInput(_event: InputEvent) -> State:
 # Resets attacking to false once the attacking animation has finished
 func _on_animated_sprite_2d_animation_finished() -> void:
 	attacking = false
+	ToggleWeapon()
+
+
+func ToggleWeapon() -> void:
+	weapon_anims.visible = attacking
