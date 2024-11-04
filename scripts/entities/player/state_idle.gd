@@ -7,7 +7,6 @@ class_name State_Idle extends State
 
 # What happens when the player enters this State
 func Enter() -> void:
-	player.UpdateAnim("idle")
 	pass
 
 
@@ -18,6 +17,7 @@ func Exit() -> void:
 
 # What happens during the _process update in this State
 func Process(_delta : float) -> State:
+	player.UpdateAnim("idle")
 	if player.direction != Vector2.ZERO:
 		return walk
 	player.velocity = Vector2.ZERO

@@ -48,13 +48,18 @@ func UpdateAnim(state: String) -> void:
 	anim.play(state + "_" + AnimDirection())
 
 
-# Determines the animation direction string based on the cardinal direction
+# Determines the animation direction string based on the mouse position
 func AnimDirection() -> String:
-	if cardinal_direction == Vector2.DOWN:
-		return "down"
-	elif cardinal_direction == Vector2.UP:
-		return "up"
-	elif cardinal_direction == Vector2.LEFT:
-		return "left"
+	var mouse_position = get_global_mouse_position()
+	var direction_to_mouse = (mouse_position - global_position).normalized()
+
+	if abs(direction_to_mouse.x) > abs(direction_to_mouse.y):
+		if direction_to_mouse.x > 0:
+			return "right"
+		else:
+			return "left"
 	else:
-		return "right"
+		if direction_to_mouse.y > 0:
+			return "down"
+		else:
+			return "up"
