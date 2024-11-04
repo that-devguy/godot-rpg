@@ -22,13 +22,14 @@ func Enter() -> void:
 	attacking = true
 	ToggleWeapon()
 	
-	await get_tree().create_timer(0.075).timeout
+	await get_tree().create_timer(0.075).timeout #Delays hit for peak swing
 	hurt_box.monitoring = true
 	pass
 
 
 # What happens when the player exits this State
 func Exit() -> void:
+	hurt_box.monitoring = false
 	pass
 
 
@@ -57,7 +58,6 @@ func HandleInput(_event: InputEvent) -> State:
 # Resets attacking to false once the attacking animation has finished
 func _on_animated_sprite_2d_animation_finished() -> void:
 	attacking = false
-	hurt_box.monitoring = false
 	ToggleWeapon()
 
 
