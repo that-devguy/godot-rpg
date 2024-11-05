@@ -8,7 +8,6 @@ var attacking : bool = false
 @onready var weapon: Sprite2D = $"../../Player/Weapons"
 @onready var weapon_anim: AnimationPlayer = $"../../Player/Weapons/WeaponAnims"
 @onready var attack_hurt_box: HurtBox = %AttackHurtBox
-@onready var interactions: PlayerInteractionsHost = $"../../Interactions"
 
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
@@ -18,7 +17,6 @@ var attacking : bool = false
 func Enter() -> void:
 	player.UpdateAnim("1h_attack")
 	weapon_anim.play("1h_sword_attack_" + player.AnimDirection())
-	interactions.UpdateHitBoxDirection()
 	weapon_anim.animation_finished.connect(EndAttack)
 	attacking = true
 	ToggleWeapon()

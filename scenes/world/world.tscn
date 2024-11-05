@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://4psu8lvt6uux"]
+[gd_scene load_steps=8 format=3 uid="uid://4psu8lvt6uux"]
 
 [ext_resource type="PackedScene" uid="uid://gfbasxh4cjaq" path="res://assets/tilesets/test_map.tscn" id="1_k8l14"]
 [ext_resource type="PackedScene" uid="uid://xu3diojofdex" path="res://assets/entities/player/player.tscn" id="2_hgsgl"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_thicu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_shvop"]
+[ext_resource type="PackedScene" uid="uid://ddaid4ggtx6lm" path="res://assets/entities/enemies/bat/bat.tscn" id="5_xtn1o"]
 
 [sub_resource type="Resource" id="Resource_e3km2"]
 script = ExtResource("4_shvop")
@@ -33,6 +34,9 @@ tween_resource = SubResource("Resource_e3km2")
 tween_on_load = false
 follow_damping = true
 limit_target = NodePath("../../camera_bounds/CollisionShape2D")
+
+[node name="Bat" parent="test_map" instance=ExtResource("5_xtn1o")]
+position = Vector2(133, 564)
 
 [node name="camera_bounds" type="Area2D" parent="."]
 
