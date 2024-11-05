@@ -5,9 +5,9 @@ var attacking : bool = false
 
 @export_range(1,20,0.5) var decelerate_speed : float = 5.0
 
-@onready var weapon: Sprite2D = $"../../Weapons"
-@onready var weapon_anim: AnimationPlayer = $"../../WeaponAnims"
-@onready var hurt_box: HurtBox = $"../../Interactions/HurtBox"
+@onready var weapon: Sprite2D = $"../../Player/Weapons"
+@onready var weapon_anim: AnimationPlayer = $"../../Player/Weapons/WeaponAnims"
+@onready var attack_hurt_box: HurtBox = %AttackHurtBox
 @onready var interactions: PlayerInteractionsHost = $"../../Interactions"
 
 @onready var walk: State = $"../Walk"
@@ -24,7 +24,7 @@ func Enter() -> void:
 	ToggleWeapon()
 	
 	await get_tree().create_timer(0.075).timeout #Delays hit for peak swing
-	hurt_box.monitoring = true
+	attack_hurt_box.monitoring = true
 	pass
 
 
@@ -32,7 +32,7 @@ func Enter() -> void:
 func Exit() -> void:
 	weapon_anim.animation_finished.disconnect(EndAttack)
 	attacking = false
-	hurt_box.monitoring = false
+	attack_hurt_box.monitoring = false
 	pass
 
 
