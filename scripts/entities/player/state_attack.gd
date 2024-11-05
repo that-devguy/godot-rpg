@@ -5,7 +5,8 @@ var attacking : bool = false
 
 @export_range(1,20,0.5) var decelerate_speed : float = 5.0
 
-@onready var weapon_anims: AnimatedSprite2D = $"../../AnimatedSprite2D/WeaponAnims"
+@onready var weapon: Sprite2D = $"../../Weapons"
+@onready var weapon_anim: AnimationPlayer = $"../../WeaponAnims"
 @onready var hurt_box: HurtBox = $"../../Interactions/HurtBox"
 @onready var interactions: PlayerInteractionsHost = $"../../Interactions"
 
@@ -16,9 +17,9 @@ var attacking : bool = false
 # What happens when the player enters this State
 func Enter() -> void:
 	player.UpdateAnim("1h_attack")
+	weapon_anim.play("1h_sword_attack_" + player.AnimDirection())
 	interactions.UpdateHitBoxDirection()
-	weapon_anims.play("1h_sword_attack_" + player.AnimDirection())
-	_on_animated_sprite_2d_animation_finished()
+	weapon_anim.animation_finished.connect(EndAttack)
 	attacking = true
 	ToggleWeapon()
 	
@@ -29,6 +30,8 @@ func Enter() -> void:
 
 # What happens when the player exits this State
 func Exit() -> void:
+	weapon_anim.animation_finished.disconnect(EndAttack)
+	attacking = false
 	hurt_box.monitoring = false
 	pass
 
@@ -56,10 +59,10 @@ func HandleInput(_event: InputEvent) -> State:
 
 
 # Resets attacking to false once the attacking animation has finished
-func _on_animated_sprite_2d_animation_finished() -> void:
+func EndAttack(_newAnimName : String) -> void:
 	attacking = false
 	ToggleWeapon()
 
 
 func ToggleWeapon() -> void:
-	weapon_anims.visible = attacking
+	weapon.visible = attacking
