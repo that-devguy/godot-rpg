@@ -10,8 +10,9 @@ var direction: Vector2 = Vector2.ZERO
 
 
 func _ready():
+	PlayerManager.player = self
 	state_machine.Initialize(self)
-
+	pass
 
 func _process(_delta: float) -> void:
 	# Handles player input and updates direction for movement
