@@ -45,5 +45,3 @@ visible = false
 position = Vector2(448, 408)
 shape = SubResource("RectangleShape2D_l6xjw")
 disabled = true
-
-[editable path="test_map/Bat"]
