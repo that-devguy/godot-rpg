@@ -1,7 +1,7 @@
 class_name HitBox extends Area2D
 
 
-signal Damaged(damage : int)
+signal Damaged(hurt_box : HurtBox)
 
 
 func _ready() -> void:
@@ -12,6 +12,5 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func TakeDamage(damage : int) -> void:
-	print("TakeDamage: ", damage)
-	Damaged.emit(damage)
+func TakeDamage(hurt_box : HurtBox) -> void:
+	Damaged.emit(hurt_box)
