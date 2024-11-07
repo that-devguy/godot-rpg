@@ -23,6 +23,9 @@ size = Vector2(896, 816)
 z_index = 0
 position = Vector2(224, 773)
 
+[node name="Bat" parent="test_map" instance=ExtResource("5_xtn1o")]
+position = Vector2(112, 570)
+
 [node name="PhantomCamera2D" type="Node2D" parent="test_map" node_paths=PackedStringArray("follow_target")]
 position = Vector2(224, 735)
 scale = Vector2(0.90242, 1.18341)
@@ -35,9 +38,6 @@ tween_on_load = false
 follow_damping = true
 limit_target = NodePath("../../camera_bounds/CollisionShape2D")
 
-[node name="Bat" parent="test_map" instance=ExtResource("5_xtn1o")]
-position = Vector2(133, 564)
-
 [node name="camera_bounds" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="camera_bounds"]
@@ -45,3 +45,5 @@ visible = false
 position = Vector2(448, 408)
 shape = SubResource("RectangleShape2D_l6xjw")
 disabled = true
+
+[editable path="test_map/Bat"]
