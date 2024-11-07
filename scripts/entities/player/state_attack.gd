@@ -4,6 +4,7 @@ class_name State_Attack extends State
 var attacking : bool = false
 
 @export_range(1,20,0.5) var decelerate_speed : float = 5.0
+@export var lunge_speed : float = 100
 
 @onready var weapon: Sprite2D = $"../../Player/Weapons"
 @onready var weapon_anim: AnimationPlayer = $"../../Player/Weapons/WeaponAnims"
@@ -20,6 +21,13 @@ func Enter() -> void:
 	weapon_anim.animation_finished.connect(EndAttack)
 	attacking = true
 	ToggleWeapon()
+	
+	# Calculate the direction toward the mouse position and set a lunge velocity
+	var direction_to_mouse = (
+		player.get_global_mouse_position() - player.global_position
+		).normalized()
+	player.velocity = direction_to_mouse * lunge_speed
+	
 	
 	await get_tree().create_timer(0.075).timeout #Delays hit for peak swing
 	attack_hurt_box.monitoring = true

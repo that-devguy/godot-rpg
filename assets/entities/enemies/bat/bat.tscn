@@ -689,6 +689,7 @@ next_state = NodePath("../Idle")
 
 [node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("9_lsvrr")
+knockback_speed = 200.0
 next_state = NodePath("../Idle")
 
 [node name="Destroy" type="Node" parent="EnemyStateMachine"]
