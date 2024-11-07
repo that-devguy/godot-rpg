@@ -26,6 +26,12 @@ position = Vector2(224, 773)
 [node name="Bat" parent="test_map" instance=ExtResource("5_xtn1o")]
 position = Vector2(112, 570)
 
+[node name="Bat2" parent="test_map" instance=ExtResource("5_xtn1o")]
+position = Vector2(91, 524)
+
+[node name="Bat3" parent="test_map" instance=ExtResource("5_xtn1o")]
+position = Vector2(141, 522)
+
 [node name="PhantomCamera2D" type="Node2D" parent="test_map" node_paths=PackedStringArray("follow_target")]
 position = Vector2(224, 735)
 scale = Vector2(0.90242, 1.18341)
