@@ -694,6 +694,7 @@ next_state = NodePath("../Idle")
 
 [node name="Destroy" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_kqnyg")
+knockback_speed = 200.0
 
 [node name="HurtBox" parent="." instance=ExtResource("7_00byl")]
 collision_mask = 0

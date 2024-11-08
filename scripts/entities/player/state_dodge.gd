@@ -6,6 +6,7 @@ class_name State_Dodge extends State
 
 @onready var idle: State = $"../Idle"
 @onready var walk: State_Walk = $"../Walk"
+@onready var weapons: Sprite2D = $"../../Player/Weapons"
 
 var dodging : bool = false
 var _timer : float = 0.0
@@ -13,6 +14,7 @@ var _timer : float = 0.0
 
 # What happens when the player enters this State
 func Enter() -> void:
+	#weapons.visible = false
 	var dodge_direction = ""
 	
 	# Determines dodge direction based on input vector (Joystick friendly)
@@ -30,6 +32,7 @@ func Enter() -> void:
 
 # What happens when the player exits this State
 func Exit() -> void:
+	#weapons.visible = true
 	dodging = false
 	player.velocity = Vector2.ZERO
 	pass

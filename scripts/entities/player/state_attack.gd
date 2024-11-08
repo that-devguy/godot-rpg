@@ -67,8 +67,11 @@ func HandleInput(_event: InputEvent) -> State:
 # Resets attacking to false once the attacking animation has finished
 func EndAttack(_newAnimName : String) -> void:
 	attacking = false
+	#weapon_anim.play("1h_sword_idle_" + player.AnimDirection())
 	ToggleWeapon()
 
 
 func ToggleWeapon() -> void:
 	weapon.visible = attacking
+	pass
+	

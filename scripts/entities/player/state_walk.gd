@@ -6,6 +6,7 @@ class_name State_Walk extends State
 @onready var idle: State = $"../Idle"
 @onready var attack: State = $"../Attack"
 @onready var dodge: State = $"../Dodge"
+@onready var weapon_anim: AnimationPlayer = $"../../Player/Weapons/WeaponAnims"
 
 
 # What happens when the player enters this State
@@ -21,6 +22,7 @@ func Exit() -> void:
 # What happens during the _process update in this State
 func Process(_delta : float) -> State:
 	player.UpdateAnim("walk")
+	#weapon_anim.play("1h_sword_walk_" + player.AnimDirection())
 	if player.direction == Vector2.ZERO:
 		return idle
 	
