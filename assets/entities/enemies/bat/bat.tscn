@@ -712,7 +712,7 @@ shape = SubResource("CircleShape2D_ajelg")
 debug_color = Color(0.70366, 0.69033, 0.162097, 0.42)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-max_polyphony = 4
+max_polyphony = 8
 
 [node name="DestroyEffectSprite" type="Sprite2D" parent="."]
 visible = false

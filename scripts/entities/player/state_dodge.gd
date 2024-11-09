@@ -5,7 +5,7 @@ class_name State_Dodge extends State
 @export var dodge_duration : float = 0.45
 
 @onready var idle: State = $"../Idle"
-@onready var walk: State_Walk = $"../Walk"
+@onready var walk: State = $"../Walk"
 @onready var weapons: Sprite2D = $"../../Player/Weapons"
 
 var dodging : bool = false
@@ -14,14 +14,21 @@ var _timer : float = 0.0
 
 # What happens when the player enters this State
 func Enter() -> void:
+	player.set_process(false) # Disable input processing to
 	#weapons.visible = false
 	var dodge_direction = ""
 	
-	# Determines dodge direction based on input vector (Joystick friendly)
-	if abs(player.direction.x) > abs(player.direction.y):
-		dodge_direction = "dodge_left" if player.direction.x < 0 else "dodge_right"
+	
+	if player.state_machine.prev_state == idle:
+		# While idle dodge direction based on mouse direction
+		dodge_direction = "dodge_" + player.AnimDirection()
+		player.direction = (player.get_global_mouse_position() - player.global_position).normalized()
 	else:
-		dodge_direction = "dodge_up" if player.direction.y < 0 else "dodge_down"
+		# While walking dodge direction based on input vector (Joystick friendly)
+		if abs(player.direction.x) > abs(player.direction.y):
+			dodge_direction = "dodge_left" if player.direction.x < 0 else "dodge_right"
+		else:
+			dodge_direction = "dodge_up" if player.direction.y < 0 else "dodge_down"
 	
 	dodging = true
 	_timer = dodge_duration
@@ -33,6 +40,7 @@ func Enter() -> void:
 # What happens when the player exits this State
 func Exit() -> void:
 	#weapons.visible = true
+	player.set_process(true) # Enable input processing
 	dodging = false
 	player.velocity = Vector2.ZERO
 	pass
