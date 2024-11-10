@@ -3,6 +3,8 @@ class_name HurtBox extends Area2D
 
 @export var damage : int = 1
 
+var source_state : State = null
+
 
 func _ready() -> void:
 	area_entered.connect(AreaEntered)

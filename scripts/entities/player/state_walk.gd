@@ -2,11 +2,10 @@ class_name State_Walk extends State
 
 
 @export var move_speed : float = 60.0
+@export var attack_1: State
 
 @onready var idle: State = $"../Idle"
-@onready var attack: State = $"../Attack"
 @onready var dodge: State = $"../Dodge"
-@onready var weapon_anim: AnimationPlayer = $"../../Player/Weapons/WeaponAnims"
 
 
 # What happens when the player enters this State
@@ -22,7 +21,6 @@ func Exit() -> void:
 # What happens during the _process update in this State
 func Process(_delta : float) -> State:
 	player.UpdateAnim("walk")
-	#weapon_anim.play("1h_sword_walk_" + player.AnimDirection())
 	if player.direction == Vector2.ZERO:
 		return idle
 	
@@ -39,7 +37,7 @@ func Physics(_delta : float) -> State:
 # What happens with input events in this State
 func HandleInput(_event: InputEvent) -> State:
 	if _event.is_action_pressed("attack"):
-		return attack
+		return attack_1
 	elif _event.is_action_pressed("dodge_roll"):
 		return dodge
 	return null
