@@ -2,7 +2,8 @@ class_name EnemyStateDestroy extends EnemyState
 
 
 @export var anim_name : String = "destroy"
-@export var knockback_speed : float = 100.0
+@export var small_knockback_speed : float = 20.0
+@export var large_knockback_speed : float = 100.0
 @export var descelerate_speed : float = 10.0
 @onready var shadow: Sprite2D = $"../../Shadow"
 
@@ -11,6 +12,7 @@ class_name EnemyStateDestroy extends EnemyState
 var _damage_position : Vector2
 var _direction : Vector2
 var _timer : float = 0.3
+var knockback_speed : float = 0.0
 
 
 # What happens when we initialize this State
@@ -55,6 +57,10 @@ func Physics(_delta : float) -> EnemyState:
 
 func _on_enemy_destroyed(hurt_box : HurtBox) -> void:
 	_damage_position = hurt_box.global_position
+	if hurt_box.source_state is State_Attack3:
+		knockback_speed = large_knockback_speed
+	else:
+		knockback_speed = small_knockback_speed
 	state_machine.ChangeState(self)
 
 

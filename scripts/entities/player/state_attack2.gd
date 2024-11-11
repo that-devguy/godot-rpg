@@ -18,6 +18,7 @@ var attack_queued: bool = false
 func Enter() -> void:
 	player.UpdateAnim("sword_attack2")
 	player.anim.animation_finished.connect(EndAttack)
+	attack_hurt_box.source_state = self
 	attacking = true
 	attack_queued = false
 	

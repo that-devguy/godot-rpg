@@ -15,8 +15,8 @@ var attacking : bool = false
 func Enter() -> void:
 	player.UpdateAnim("sword_attack3")
 	player.anim.animation_finished.connect(EndAttack)
-	attacking = true
 	attack_hurt_box.source_state = self
+	attacking = true
 	
 	# Calculate the direction toward the mouse position and set a lunge velocity
 	var direction_to_mouse = (

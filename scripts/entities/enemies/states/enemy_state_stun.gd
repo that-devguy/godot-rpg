@@ -2,7 +2,8 @@ class_name EnemyStateStun extends EnemyState
 
 
 @export var anim_name : String = "stun"
-@export var knockback_speed : float = 100.0
+@export var small_knockback_speed : float = 20.0
+@export var large_knockback_speed : float = 100.0
 @export var descelerate_speed : float = 10.0
 
 @export_category("AI")
@@ -11,6 +12,7 @@ class_name EnemyStateStun extends EnemyState
 var _damage_position : Vector2
 var _direction : Vector2
 var _animation_finished : bool = false
+var knockback_speed : float = small_knockback_speed
 
 
 # What happens when we initialize this State
@@ -39,6 +41,7 @@ func Enter() -> void:
 func Exit() -> void:
 	enemy.invulnerable = false
 	enemy.animation_player.animation_finished.disconnect(_on_animation_finished)
+	knockback_speed = small_knockback_speed
 	pass
 
 
@@ -56,10 +59,15 @@ func Physics(_delta : float) -> EnemyState:
 
 
 func _on_enemy_damaged(hurt_box : HurtBox) -> void:
-	if hurt_box.source_state == State_Attack3:
-		_damage_position = hurt_box.global_position
-		state_machine.ChangeState(self)
+	_damage_position = hurt_box.global_position
+	if hurt_box.source_state is State_Attack3:
+		knockback_speed = large_knockback_speed
+	else:
+		knockback_speed = small_knockback_speed
+	
+	state_machine.ChangeState(self)
 
 
 func _on_animation_finished(_a : String) -> void:
 	_animation_finished = true
+	knockback_speed = small_knockback_speed

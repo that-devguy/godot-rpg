@@ -650,8 +650,8 @@ _data = {
 [node name="Bat" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 4
-collision_mask = 3
 script = ExtResource("1_sbunn")
+hp = 50
 
 [node name="Shadow" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.588235)
@@ -690,12 +690,12 @@ next_state = NodePath("../Idle")
 
 [node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("9_lsvrr")
-knockback_speed = 200.0
+large_knockback_speed = 200.0
 next_state = NodePath("../Idle")
 
 [node name="Destroy" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_kqnyg")
-knockback_speed = 200.0
+large_knockback_speed = 200.0
 
 [node name="HurtBox" parent="." instance=ExtResource("7_00byl")]
 collision_mask = 0
