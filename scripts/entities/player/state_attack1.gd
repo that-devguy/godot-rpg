@@ -51,6 +51,7 @@ func Exit() -> void:
 	attack_hurt_box.monitoring = false
 	
 	ToggleWeapon()
+	weapon.offset.y = 0 # Reset offset
 	pass
 
 
@@ -92,6 +93,15 @@ func EndAttack(_newAnimName : String) -> void:
 func update_weapon_rotation() -> void:
 	var direction_to_mouse = (player.get_global_mouse_position() - player.global_position).normalized()
 	weapon.rotation = direction_to_mouse.angle() + deg_to_rad(270)
+	
+	# Set offset if the attack anim dir is "up"
+	if player.AnimDirection() == "up":
+		weapon.offset.y = -6
+	else:
+		weapon.offset.y = 0
+	
+	print(player.AnimDirection())
+	print(weapon.offset.y)
 
 
 func ToggleWeapon() -> void:
