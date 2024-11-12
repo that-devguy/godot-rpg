@@ -19,7 +19,7 @@ func Enter() -> void:
 	
 	if player.state_machine.prev_state == idle:
 		# While idle dodge direction based on mouse direction
-		dodge_direction = "dodge_" + player.AnimDirection()
+		dodge_direction = "dodge_" + player.AnimDirection()["direction"]
 		player.direction = (player.get_global_mouse_position() - player.global_position).normalized()
 	else:
 		# While walking dodge direction based on input vector (Joystick friendly)

@@ -4,8 +4,11 @@ class_name Player extends CharacterBody2D
 # Variables
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction: Vector2 = Vector2.ZERO
+var dir: String = "down"
+var flip_state : bool = false
 
 @onready var anim: AnimationPlayer = $Player/PlayerAnims
+@onready var sprite: Sprite2D = $Player
 @onready var state_machine : PlayerStateMachine = $StateMachine
 
 
@@ -14,12 +17,17 @@ func _ready():
 	state_machine.Initialize(self)
 	pass
 
+
 func _process(_delta: float) -> void:
 	# Handles player input and updates direction for movement
 	direction = Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
+	
+	SetDirection()
+	
+	pass
 
 
 func _physics_process(_delta: float) -> void:
@@ -47,21 +55,25 @@ func SetDirection() -> bool:
 
 # Updates the animation based on the current state and facing direction
 func UpdateAnim(state: String) -> void:
-	anim.play(state + "_" + AnimDirection())
+	var anim_direction = AnimDirection()
+	print(anim_direction)
+	anim.play(state + "_" + anim_direction["direction"])
+	
+	sprite.flip_h = anim_direction["flip"]
 
 
 # Determines the animation direction string based on the mouse position
-func AnimDirection() -> String:
-	var mouse_position = get_global_mouse_position()
-	var direction_to_mouse = (mouse_position - global_position).normalized()
+func AnimDirection() -> Dictionary:
+	if cardinal_direction == Vector2.DOWN:
+		dir = "down"
+	elif cardinal_direction == Vector2.UP:
+		dir = "up"
 	
-	if abs(direction_to_mouse.x) > abs(direction_to_mouse.y):
-		if direction_to_mouse.x > 0:
-			return "right"
-		else:
-			return "left"
-	else:
-		if direction_to_mouse.y > 0:
-			return "down"
-		else:
-			return "up"
+	# If direction.x is negative, set flip_state to true (left movement)
+	if direction.x < 0 and !flip_state:
+		flip_state = true
+	# If direction.x is positive, set flip_state to false (right movement)
+	elif direction.x > 0 and flip_state:
+		flip_state = false
+	
+	return {"direction": dir, "flip": flip_state}

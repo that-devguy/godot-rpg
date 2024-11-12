@@ -85,7 +85,7 @@ func update_weapon_rotation() -> void:
 	weapon.rotation = direction_to_mouse.angle() + deg_to_rad(270)
 	
 	# Reset offset weapon only when the mouse is in the "down" direction
-	if player.AnimDirection() == "up":
+	if player.AnimDirection()["direction"] == "up":
 		weapon.offset.y = -6
 	else:
 		weapon.offset.y = 0

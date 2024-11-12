@@ -20,7 +20,6 @@ size = Vector2(896, 816)
 [node name="test_map" parent="." instance=ExtResource("1_k8l14")]
 
 [node name="player" parent="test_map" instance=ExtResource("2_hgsgl")]
-z_index = 0
 position = Vector2(224, 773)
 
 [node name="Bat" parent="test_map" instance=ExtResource("5_xtn1o")]

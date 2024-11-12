@@ -18,9 +18,11 @@ func Exit() -> void:
 
 # What happens during the _process update in this State
 func Process(_delta : float) -> State:
-	player.UpdateAnim("idle")
+	player.UpdateAnim("idle1")
+	
 	if player.direction != Vector2.ZERO:
 		return walk
+	
 	player.velocity = Vector2.ZERO
 	return null 
 
