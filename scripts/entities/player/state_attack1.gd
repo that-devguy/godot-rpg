@@ -99,9 +99,6 @@ func update_weapon_rotation() -> void:
 		weapon.offset.y = -6
 	else:
 		weapon.offset.y = 0
-	
-	print(player.AnimDirection())
-	print(weapon.offset.y)
 
 
 func ToggleWeapon() -> void:

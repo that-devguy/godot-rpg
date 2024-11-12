@@ -2358,7 +2358,7 @@ _data = {
 radius = 3.0
 
 [node name="Player" type="CharacterBody2D"]
-z_index = 1
+z_as_relative = false
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 5
@@ -2371,7 +2371,7 @@ modulate = Color(1, 1, 1, 0.588235)
 texture = ExtResource("2_dr8wy")
 
 [node name="Player" type="Sprite2D" parent="."]
-z_index = 1
+y_sort_enabled = true
 texture = ExtResource("2_d0yv6")
 hframes = 6
 vframes = 4
@@ -2397,7 +2397,7 @@ debug_color = Color(0.943186, 0.232095, 0.149364, 0.42)
 
 [node name="Weapon" type="Sprite2D" parent="Player"]
 visible = false
-z_index = -1
+y_sort_enabled = true
 rotation = 3.14159
 texture = ExtResource("11_xopxn")
 hframes = 10

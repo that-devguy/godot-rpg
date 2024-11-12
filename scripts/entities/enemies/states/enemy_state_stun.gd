@@ -9,6 +9,8 @@ class_name EnemyStateStun extends EnemyState
 @export_category("AI")
 @export var next_state : EnemyState
 
+@onready var blood_particles: CPUParticles2D = $"../../BloodParticles"
+
 var _damage_position : Vector2
 var _direction : Vector2
 var _animation_finished : bool = false
@@ -64,6 +66,8 @@ func _on_enemy_damaged(hurt_box : HurtBox) -> void:
 		knockback_speed = large_knockback_speed
 	else:
 		knockback_speed = small_knockback_speed
+	
+	blood_particles.emitting = true
 	
 	state_machine.ChangeState(self)
 
