@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://xu3diojofdex"]
+[gd_scene load_steps=63 format=3 uid="uid://xu3diojofdex"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3n50m"]
 [ext_resource type="Texture2D" uid="uid://ckx4u200qs3be" path="res://assets/entities/player/player_idle.png" id="2_d0yv6"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cafs78pnjlt54" path="res://assets/overlap/hurt_box/hurt_box.tscn" id="9_6hkal"]
 [ext_resource type="Texture2D" uid="uid://d3irj4rbr2fqp" path="res://assets/entities/player/player_attack_sword_combo.png" id="9_lkj1d"]
 [ext_resource type="Texture2D" uid="uid://ronk7v2aw36j" path="res://assets/entities/player/player_idle1.png" id="10_tu71f"]
+[ext_resource type="Texture2D" uid="uid://cu46ut4a1rvk0" path="res://assets/entities/player/player_walk1.png" id="11_jp5i0"]
 [ext_resource type="Texture2D" uid="uid://bqpqyjlicbcm8" path="res://assets/entities/player/sword_attack_combo.png" id="11_xopxn"]
 [ext_resource type="Script" path="res://scripts/entities/player/state_dodge.gd" id="16_k84mv"]
 [ext_resource type="Script" path="res://scripts/entities/player/state_attack2.gd" id="19_nrpug"]
@@ -2208,6 +2209,114 @@ tracks/3/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_3xt1s"]
+resource_name = "walk1_down"
+length = 0.60001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_jp5i0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_txxx7"]
+resource_name = "walk1_up"
+length = 0.60001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_jp5i0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bee6y"]
 _data = {
 "1h_attack_down": SubResource("Animation_6f25l"),
@@ -2237,6 +2346,8 @@ _data = {
 "sword_attack3_left": SubResource("Animation_t3u3o"),
 "sword_attack3_right": SubResource("Animation_n8x4k"),
 "sword_attack3_up": SubResource("Animation_5psbw"),
+"walk1_down": SubResource("Animation_3xt1s"),
+"walk1_up": SubResource("Animation_txxx7"),
 "walk_down": SubResource("Animation_7rkyy"),
 "walk_left": SubResource("Animation_t5h2y"),
 "walk_right": SubResource("Animation_h4q5q"),

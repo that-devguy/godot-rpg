@@ -56,7 +56,6 @@ func SetDirection() -> bool:
 # Updates the animation based on the current state and facing direction
 func UpdateAnim(state: String) -> void:
 	var anim_direction = AnimDirection()
-	print(anim_direction)
 	anim.play(state + "_" + anim_direction["direction"])
 	
 	sprite.flip_h = anim_direction["flip"]
