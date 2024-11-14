@@ -3,13 +3,15 @@ class_name Player extends CharacterBody2D
 
 # Variables
 var cardinal_direction : Vector2 = Vector2.DOWN
-var direction: Vector2 = Vector2.ZERO
-var dir: String = "down"
-var flip_state : bool = false
+var direction : Vector2 = Vector2.ZERO
+var current_vertical_direction : String = "down"
+var flip : float = 1
 
 @onready var anim: AnimationPlayer = $Player/PlayerAnims
-@onready var sprite: Sprite2D = $Player
+@onready var player_sprite: Sprite2D = $Player
+@onready var weapon_sprite: Sprite2D = $Player/Weapon
 @onready var state_machine : PlayerStateMachine = $StateMachine
+
 
 
 func _ready():
@@ -25,8 +27,7 @@ func _process(_delta: float) -> void:
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
 	
-	SetDirection()
-	
+	SetDirection() 
 	pass
 
 
@@ -40,39 +41,38 @@ func SetDirection() -> bool:
 	if direction == Vector2.ZERO:
 		return false
 	
-	# Determines new direction based on input vector (Joystick friendly)
-	if direction.y == 0:
-		new_dir = Vector2.LEFT if direction.x < 0 else Vector2.RIGHT
-	elif direction.x == 0:
-		new_dir = Vector2.UP if direction.y < 0 else Vector2.DOWN
+	# Handle horizontal movement (left/right)
+	if direction.x < 0:
+		new_dir = Vector2.LEFT
+		player_sprite.scale.x = -1  # Flip to left
+	elif direction.x > 0:
+		new_dir = Vector2.RIGHT
+		player_sprite.scale.x = 1  # Flip to right
 	
-	if new_dir == cardinal_direction:
-		return false
+	# Handle vertical movement (up/down)
+	if direction.y < 0:
+		new_dir = Vector2.UP
+		current_vertical_direction = "up"  # Update to up animation
+		weapon_sprite.z_index = 1
+	elif direction.y > 0:
+		new_dir = Vector2.DOWN
+		current_vertical_direction = "down"  # Update to down animation
+		weapon_sprite.z_index = 0
 	
-	cardinal_direction = new_dir
-	return true
+	# If direction has changed, update cardinal direction
+	if new_dir != cardinal_direction:
+		cardinal_direction = new_dir
+		return true
+	
+	return false
 
 
 # Updates the animation based on the current state and facing direction
 func UpdateAnim(state: String) -> void:
-	var anim_direction = AnimDirection()
-	anim.play(state + "_" + anim_direction["direction"])
-	
-	sprite.flip_h = anim_direction["flip"]
+	anim.play(state + "_" + AnimDirection())
+	pass
 
 
-# Determines the animation direction string based on the mouse position
-func AnimDirection() -> Dictionary:
-	if cardinal_direction == Vector2.DOWN:
-		dir = "down"
-	elif cardinal_direction == Vector2.UP:
-		dir = "up"
-	
-	# If direction.x is negative, set flip_state to true (left movement)
-	if direction.x < 0 and !flip_state:
-		flip_state = true
-	# If direction.x is positive, set flip_state to false (right movement)
-	elif direction.x > 0 and flip_state:
-		flip_state = false
-	
-	return {"direction": dir, "flip": flip_state}
+# Determines the animation direction string based on vertical direction (up/down) and flip for horizontal
+func AnimDirection() -> String:
+	return current_vertical_direction

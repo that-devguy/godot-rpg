@@ -18,7 +18,6 @@ func Enter() -> void:
 	player.UpdateAnim("sword_attack3")
 	player.anim.animation_finished.connect(EndAttack)
 	
-	ToggleWeapon()
 	weapon_anims.play("combo_attack3")
 	
 	update_weapon_rotation()
@@ -46,7 +45,6 @@ func Exit() -> void:
 	attacking = false
 	attack_hurt_box.monitoring = false
 	
-	ToggleWeapon()
 	weapon.offset.y = 0 # Reset offset
 	
 	pass
@@ -85,11 +83,7 @@ func update_weapon_rotation() -> void:
 	weapon.rotation = direction_to_mouse.angle() + deg_to_rad(270)
 	
 	# Reset offset weapon only when the mouse is in the "down" direction
-	if player.AnimDirection()["direction"] == "up":
+	if player.AnimDirection() == "up":
 		weapon.offset.y = -6
 	else:
 		weapon.offset.y = 0
-
-
-func ToggleWeapon() -> void:
-	weapon.visible = !weapon.visible
