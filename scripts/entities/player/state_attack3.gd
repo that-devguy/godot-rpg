@@ -7,8 +7,9 @@ class_name State_Attack3 extends State
 @onready var attack_hurt_box: HurtBox = %AttackHurtBox
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
-@onready var weapon: Sprite2D = $"../../Player/Weapon"
-@onready var weapon_anims: AnimationPlayer = $"../../Player/Weapon/WeaponAnims"
+@onready var weapon_sprite: Sprite2D = $"../../Player/WeaponHolder/Weapon"
+@onready var weapon_holder: Node2D = $"../../Player/WeaponHolder"
+@onready var weapon_anims: AnimationPlayer = $"../../Player/WeaponHolder/Weapon/WeaponAnims"
 
 var attacking : bool = false
 
@@ -45,8 +46,6 @@ func Exit() -> void:
 	attacking = false
 	attack_hurt_box.monitoring = false
 	
-	weapon.offset.y = 0 # Reset offset
-	
 	pass
 
 
@@ -80,10 +79,4 @@ func EndAttack(_newAnimName : String) -> void:
 # Update the weapon rotation based on mouse position
 func update_weapon_rotation() -> void:
 	var direction_to_mouse = (player.get_global_mouse_position() - player.global_position).normalized()
-	weapon.rotation = direction_to_mouse.angle() + deg_to_rad(270)
-	
-	# Reset offset weapon only when the mouse is in the "down" direction
-	if player.AnimDirection() == "up":
-		weapon.offset.y = -6
-	else:
-		weapon.offset.y = 0
+	weapon_holder.rotation = direction_to_mouse.angle() + deg_to_rad(0)

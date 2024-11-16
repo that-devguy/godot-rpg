@@ -9,7 +9,7 @@ var flip : float = 1
 
 @onready var anim: AnimationPlayer = $Player/PlayerAnims
 @onready var player_sprite: Sprite2D = $Player
-@onready var weapon_sprite: Sprite2D = $Player/Weapon
+@onready var weapon_sprite: Sprite2D = $Player/WeaponHolder/Weapon
 @onready var state_machine : PlayerStateMachine = $StateMachine
 
 
