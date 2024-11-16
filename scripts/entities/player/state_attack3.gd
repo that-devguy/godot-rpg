@@ -20,6 +20,7 @@ func Enter() -> void:
 	player.anim.animation_finished.connect(EndAttack)
 	
 	weapon_anims.play("combo_attack3")
+	weapon_anims.queue("RESET")
 	
 	update_weapon_rotation()
 
@@ -45,7 +46,7 @@ func Exit() -> void:
 	player.anim.animation_finished.disconnect(EndAttack)
 	attacking = false
 	attack_hurt_box.monitoring = false
-	
+	weapon_holder.rotation = 0
 	pass
 
 

@@ -2405,7 +2405,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(7, -5)]
+"values": [Vector2(7, -2.02)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -2434,7 +2434,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_fmmbj"]
 resource_name = "combo_attack1"
-length = 0.450005
+length = 0.800005
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2479,10 +2479,10 @@ tracks/3/path = NodePath(".:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.15, 0.25),
+"times": PackedFloat32Array(0.45, 0.55),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector2(0, -3), Vector2(0, 3)]
+"values": [Vector2(4, -3.02), Vector2(0, 3)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -2491,7 +2491,7 @@ tracks/4/path = NodePath(".:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.15, 0.25),
+"times": PackedFloat32Array(0.45, 0.55),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [0.253073, 5.83813]
@@ -2684,7 +2684,7 @@ y_sort_enabled = true
 position = Vector2(0, -2.98)
 
 [node name="Weapon" type="Sprite2D" parent="Player/WeaponHolder"]
-position = Vector2(7, -5)
+position = Vector2(7, -2.02)
 texture = ExtResource("13_uuay7")
 offset = Vector2(-7, -1)
 

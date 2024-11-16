@@ -20,9 +20,10 @@ var attack_queued: bool = false
 # What happens when the player enters this State
 func Enter() -> void:
 	player.UpdateAnim("sword_attack1")
-	player.anim.animation_finished.connect(EndAttack)
 	
+	weapon_anims.animation_finished.connect(EndAttack)
 	weapon_anims.play("combo_attack1")
+	weapon_anims.queue("RESET")
 	
 	update_weapon_rotation()
 	
@@ -46,10 +47,10 @@ func Enter() -> void:
 
 # What happens when the player exits this State
 func Exit() -> void:
-	player.anim.animation_finished.disconnect(EndAttack)
+	weapon_anims.animation_finished.disconnect(EndAttack)
 	attacking = false
 	attack_hurt_box.monitoring = false
-	
+
 	pass
 
 
@@ -83,6 +84,7 @@ func HandleInput(_event: InputEvent) -> State:
 # Resets attacking to false once the attacking animation has finished
 func EndAttack(_newAnimName : String) -> void:
 	attacking = false
+	weapon_holder.rotation = 0  # Reset to the default rotation after the attack
 	if attack_queued:
 		player.state_machine.ChangeState(attack_2)
 
