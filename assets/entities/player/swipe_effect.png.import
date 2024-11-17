@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ronk7v2aw36j"
-path="res://.godot/imported/player_idle1.png-db81de30cff0f83c856714013c0ed0ea.ctex"
+uid="uid://vuvtqn0ionaw"
+path="res://.godot/imported/swipe_effect.png-64aeec6c042ed518b00e3d7f27b5952d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/player/player_idle1.png"
-dest_files=["res://.godot/imported/player_idle1.png-db81de30cff0f83c856714013c0ed0ea.ctex"]
+source_file="res://assets/entities/player/swipe_effect.png"
+dest_files=["res://.godot/imported/swipe_effect.png-64aeec6c042ed518b00e3d7f27b5952d.ctex"]
 
 [params]
 

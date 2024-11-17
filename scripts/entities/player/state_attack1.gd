@@ -19,7 +19,8 @@ var attack_queued: bool = false
 
 # What happens when the player enters this State
 func Enter() -> void:
-	player.UpdateAnim("sword_attack1")
+	player.UpdateAnim("attack")
+	weapon_sprite.z_index = 0
 	
 	weapon_anims.animation_finished.connect(EndAttack)
 	weapon_anims.play("combo_attack1")
@@ -31,11 +32,15 @@ func Enter() -> void:
 	attacking = true
 	attack_queued = false
 	
+	# Schedule the lunge for frame 6
+	await get_tree().create_timer(0.375).timeout
 	# Calculate the direction toward the mouse position and set a lunge velocity
-	#var direction_to_mouse = (
-		#player.get_global_mouse_position() - player.global_position
-		#).normalized()
-	#player.velocity = direction_to_mouse * lunge_speed
+	var direction_to_mouse = (
+		player.get_global_mouse_position() - player.global_position
+		).normalized()
+	player.velocity = direction_to_mouse * lunge_speed
+	
+	
 	
 	
 	await get_tree().create_timer(0.1).timeout #Delays hit for peak swing
@@ -50,6 +55,11 @@ func Exit() -> void:
 	weapon_anims.animation_finished.disconnect(EndAttack)
 	attacking = false
 	attack_hurt_box.monitoring = false
+	
+	if player.current_vertical_direction == "up":
+		weapon_sprite.z_index = 1
+	else:
+		weapon_sprite.z_index = 0
 
 	pass
 
