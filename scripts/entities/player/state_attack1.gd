@@ -40,9 +40,6 @@ func Enter() -> void:
 		).normalized()
 	player.velocity = direction_to_mouse * lunge_speed
 	
-	
-	
-	
 	await get_tree().create_timer(0.1).timeout #Delays hit for peak swing
 	attack_hurt_box.monitoring = true
 	
