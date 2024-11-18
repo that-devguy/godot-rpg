@@ -9,6 +9,7 @@ class_name State_Attack1 extends State
 @onready var attack_hurt_box: HurtBox = %AttackHurtBox
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
+@onready var player_sprite: Sprite2D = $"../../Player"
 @onready var weapon_sprite: Sprite2D = $"../../Player/WeaponHolder/Weapon"
 @onready var weapon_holder: Node2D = $"../../Player/WeaponHolder"
 @onready var weapon_anims: AnimationPlayer = $"../../Player/WeaponHolder/Weapon/WeaponAnims"
@@ -99,4 +100,9 @@ func EndAttack(_newAnimName : String) -> void:
 # Update the weapon rotation based on mouse position
 func update_weapon_rotation() -> void:
 	var direction_to_mouse = (player.get_global_mouse_position() - player.global_position).normalized()
-	weapon_holder.rotation = direction_to_mouse.angle() + deg_to_rad(0)
+
+	# Adjust rotation based on player's facing direction
+	if player_sprite.scale.x < 0:
+		weapon_holder.rotation = -direction_to_mouse.angle() + PI
+	else:
+		weapon_holder.rotation = direction_to_mouse.angle()
