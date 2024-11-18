@@ -21,6 +21,7 @@ var attack_queued: bool = false
 func Enter() -> void:
 	player.UpdateAnim("attack")
 	weapon_sprite.z_index = 0
+	weapon_holder.scale.y = -1
 	
 	weapon_anims.animation_finished.connect(EndAttack)
 	weapon_anims.play("combo_attack2")
@@ -32,8 +33,8 @@ func Enter() -> void:
 	attacking = true
 	attack_queued = false
 	
-	# Schedule the lunge for frame 6
-	await get_tree().create_timer(0.375).timeout
+	# Schedule the lunge for frame 2
+	await get_tree().create_timer(0.0625).timeout
 	# Calculate the direction toward the mouse position and set a lunge velocity
 	var direction_to_mouse = (
 		player.get_global_mouse_position() - player.global_position
@@ -52,6 +53,7 @@ func Exit() -> void:
 	weapon_anims.animation_finished.disconnect(EndAttack)
 	attacking = false
 	attack_hurt_box.monitoring = false
+	weapon_holder.scale.y = 1
 	
 	if player.current_vertical_direction == "up":
 		weapon_sprite.z_index = 1
@@ -99,4 +101,3 @@ func EndAttack(_newAnimName : String) -> void:
 func update_weapon_rotation() -> void:
 	var direction_to_mouse = (player.get_global_mouse_position() - player.global_position).normalized()
 	weapon_holder.rotation = direction_to_mouse.angle() + deg_to_rad(0)
-	
