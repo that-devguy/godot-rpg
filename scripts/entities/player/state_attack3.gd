@@ -17,7 +17,8 @@ var attacking : bool = false
 
 # What happens when the player enters this State
 func Enter() -> void:
-	player.UpdateAnim("attack")
+	player.anim.play("attack_" + player.GetAttackAnimDirection())
+	
 	weapon_sprite.z_index = 0
 
 	weapon_anims.animation_finished.connect(EndAttack)

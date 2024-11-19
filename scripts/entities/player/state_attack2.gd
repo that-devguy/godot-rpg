@@ -20,7 +20,8 @@ var attack_queued: bool = false
 
 # What happens when the player enters this State
 func Enter() -> void:
-	player.UpdateAnim("attack")
+	player.anim.play("attack2_" + player.GetAttackAnimDirection())
+	
 	weapon_sprite.z_index = 0
 	weapon_holder.scale.y = -1
 	

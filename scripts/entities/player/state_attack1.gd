@@ -20,14 +20,14 @@ var attack_queued: bool = false
 
 # What happens when the player enters this State
 func Enter() -> void:
-	player.UpdateAnim("attack")
+	player.anim.play("attack1_" + player.GetAttackAnimDirection())
+	
+	update_weapon_rotation()
 	weapon_sprite.z_index = 0
 	
 	weapon_anims.animation_finished.connect(EndAttack)
 	weapon_anims.play("combo_attack1")
 	weapon_anims.queue("RESET")
-	
-	update_weapon_rotation()
 	
 	attack_hurt_box.source_state = self
 	attacking = true
@@ -100,7 +100,7 @@ func EndAttack(_newAnimName : String) -> void:
 # Update the weapon rotation based on mouse position
 func update_weapon_rotation() -> void:
 	var direction_to_mouse = (player.get_global_mouse_position() - player.global_position).normalized()
-
+	
 	# Adjust rotation based on player's facing direction
 	if player_sprite.scale.x < 0:
 		weapon_holder.rotation = -direction_to_mouse.angle() + PI
