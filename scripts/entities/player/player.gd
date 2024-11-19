@@ -100,15 +100,15 @@ func GetAttackAnimDirection() -> String:
 		angle_to_mouse += 360
 	
 	# Determine the animation direction based on the angle
-	if angle_to_mouse >= 340 or angle_to_mouse < 90:  # Down-right
+	if angle_to_mouse >= 320 or angle_to_mouse < 90:  # Down-right
 		player_sprite.scale.x = 1
 		current_vertical_direction = "down"  # Update player's vertical direction
 		return "down"
-	elif angle_to_mouse >= 90 and angle_to_mouse < 200:  # Down-left
+	elif angle_to_mouse >= 90 and angle_to_mouse < 220:  # Down-left
 		player_sprite.scale.x = -1
 		current_vertical_direction = "down"  # Update player's vertical direction
 		return "down"
-	elif angle_to_mouse >= 200 and angle_to_mouse < 270:  # Up-left
+	elif angle_to_mouse >= 220 and angle_to_mouse < 270:  # Up-left
 		player_sprite.scale.x = -1
 		current_vertical_direction = "up"  # Update player's vertical direction
 		return "up"
