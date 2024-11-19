@@ -2,19 +2,26 @@ class_name State_Walk extends State
 
 
 @export var move_speed : float = 60.0
-@export var attack_1: State
+@export var attack_1 : State
 
-@onready var idle: State = $"../Idle"
-@onready var dodge: State = $"../Dodge"
+@onready var idle : State = $"../Idle"
+@onready var dodge : State = $"../Dodge"
+@onready var footstep_audio : AudioStreamPlayer2D = $"../../FootstepsAudio"
 
+var footstep_timer : float = 0.0
+var footstep_interval : float = 0.25
 
 # What happens when the player enters this State
 func Enter() -> void:
+	footstep_timer = 0.0
+	if not footstep_audio.is_playing():
+		footstep_audio.play()
 	pass
 
 
 # What happens when the player exits this State
 func Exit() -> void:
+	footstep_audio.stop()
 	pass
 
 
@@ -25,6 +32,15 @@ func Process(_delta : float) -> State:
 		return idle
 	
 	player.velocity = player.direction * move_speed
+	
+	# Handle footstep sounds
+	footstep_timer += _delta
+	if footstep_timer >= footstep_interval:
+		if footstep_audio.is_playing():
+			footstep_audio.stop()  # Restart sound if already playing
+		footstep_audio.pitch_scale = randf_range(0.8, 1.2)
+		footstep_audio.play()
+		footstep_timer = 0.0
 	
 	return null
 
