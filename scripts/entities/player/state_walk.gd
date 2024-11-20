@@ -6,7 +6,8 @@ class_name State_Walk extends State
 
 @onready var idle : State = $"../Idle"
 @onready var dodge : State = $"../Dodge"
-@onready var footstep_audio : AudioStreamPlayer2D = $"../../FootstepsAudio"
+@onready var footstep_audio : AudioStreamPlayer2D = $"../../FootstepAudio"
+@onready var footstep_particles: GPUParticles2D = $"../../FootstepParticles"
 
 var footstep_timer : float = 0.0
 var footstep_interval : float = 0.25
@@ -40,6 +41,11 @@ func Process(_delta : float) -> State:
 			footstep_audio.stop()  # Restart sound if already playing
 		footstep_audio.pitch_scale = randf_range(0.8, 1.2)
 		footstep_audio.play()
+		
+		# Trigger particles
+		footstep_particles.global_position = player.global_position + Vector2(0, 0) * player.scale.y
+		footstep_particles.restart()
+		
 		footstep_timer = 0.0
 	
 	return null

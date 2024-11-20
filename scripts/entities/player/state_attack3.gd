@@ -31,8 +31,8 @@ func Enter() -> void:
 	attack_hurt_box.source_state = self
 	attacking = true
 	
-	# Schedule the lunge for frame 8
-	await get_tree().create_timer(0.5).timeout
+	# Schedule the lunge for frame 2
+	await get_tree().create_timer(0.0625).timeout
 	# Calculate the direction toward the mouse position and set a lunge velocity
 	var direction_to_mouse = (
 		player.get_global_mouse_position() - player.global_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://xu3diojofdex"]
+[gd_scene load_steps=53 format=3 uid="uid://xu3diojofdex"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3n50m"]
 [ext_resource type="Texture2D" uid="uid://chstvmkisd1hq" path="res://assets/tilesets/shadow.png" id="2_dr8wy"]
@@ -21,6 +21,29 @@
 [ext_resource type="Script" path="res://scripts/entities/player/state_attack2.gd" id="19_nrpug"]
 [ext_resource type="Script" path="res://scripts/entities/player/state_attack3.gd" id="20_ccctb"]
 [ext_resource type="Texture2D" uid="uid://cyvvvsnhb4k6a" path="res://assets/entities/player/dust_blob.png" id="21_ap6va"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n5d3j"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_eubld"]
+colors = PackedColorArray(0.870588, 0.870588, 0.870588, 0.741176, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nicq8"]
+gradient = SubResource("Gradient_eubld")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b5w6g"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 2, 0)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, -1, 0)
+scale_min = 0.5
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_nicq8")
+anim_offset_max = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ewkft"]
 load_path = "res://.godot/imported/player_idle.png-5d358f97242e0c2f3bcf65e23bdf084b.ctex"
@@ -290,7 +313,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_2mgqt"]
 resource_name = "attack3_down"
-length = 1.00001
+length = 0.625006
 step = 0.0625
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -335,15 +358,15 @@ tracks/3/path = NodePath("Player:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5, 0.5625, 0.625, 0.6875),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(5, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1)]
+"values": [Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ieco7"]
 resource_name = "attack3_up"
-length = 1.00001
+length = 0.625006
 step = 0.0625
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -388,10 +411,10 @@ tracks/3/path = NodePath("Player:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5, 0.5625, 0.625, 0.6875, 0.75),
+"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(5, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_dav0n"]
@@ -1222,7 +1245,7 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "clips": [{
-"end_offset": 0.0,
+"end_offset": 0.116661,
 "start_offset": 0.0,
 "stream": ExtResource("5_hqbao")
 }],
@@ -1230,9 +1253,9 @@ tracks/8/keys = {
 }
 tracks/8/use_blend = true
 
-[sub_resource type="Animation" id="Animation_l1pvv"]
+[sub_resource type="Animation" id="Animation_1a4el"]
 resource_name = "combo_attack3"
-length = 1.00001
+length = 0.625006
 step = 0.0625
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1277,7 +1300,7 @@ tracks/3/path = NodePath(".:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5625, 0.625),
+"times": PackedFloat32Array(0.0625, 0.125),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [Vector2(0, -6), Vector2(0, 6)]
@@ -1289,7 +1312,7 @@ tracks/4/path = NodePath(".:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.5625, 0.625),
+"times": PackedFloat32Array(0.0625, 0.125),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [0.253073, 5.83813]
@@ -1311,7 +1334,7 @@ tracks/6/path = NodePath("Effects:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.625, 0.6875),
+"times": PackedFloat32Array(0.125, 0.1875),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 2]
@@ -1323,7 +1346,7 @@ tracks/7/path = NodePath("Effects:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.625, 0.75),
+"times": PackedFloat32Array(0, 0.125, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1336,44 +1359,20 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "clips": [{
-"end_offset": 0.0,
+"end_offset": 0.116661,
 "start_offset": 0.0,
 "stream": ExtResource("5_hqbao")
 }],
-"times": PackedFloat32Array(0.575)
+"times": PackedFloat32Array(0.075)
 }
 tracks/8/use_blend = true
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Effects:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0.625),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2.59166, -5.43357)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Effects:rotation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0.625),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.261799]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c2g3h"]
 _data = {
 "RESET": SubResource("Animation_0dco5"),
 "combo_attack1": SubResource("Animation_fmmbj"),
 "combo_attack2": SubResource("Animation_cismx"),
-"combo_attack3": SubResource("Animation_l1pvv")
+"combo_attack3": SubResource("Animation_1a4el")
 }
 
 [sub_resource type="Animation" id="Animation_1rmj7"]
@@ -1513,16 +1512,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_yoemf"]
 radius = 3.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0ltfw"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ovycf"]
-particle_flag_disable_z = true
-gravity = Vector3(0, -1, 0)
-
 [node name="Player" type="CharacterBody2D"]
 z_as_relative = false
 y_sort_enabled = true
@@ -1536,6 +1525,17 @@ script = ExtResource("1_3n50m")
 modulate = Color(1, 1, 1, 0.588235)
 texture = ExtResource("2_dr8wy")
 offset = Vector2(0, -6)
+
+[node name="FootstepParticles" type="GPUParticles2D" parent="."]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_n5d3j")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_b5w6g")
+texture = ExtResource("21_ap6va")
+one_shot = true
+explosiveness = 0.54
+draw_order = 0
 
 [node name="Player" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -1628,6 +1628,7 @@ attack_3 = NodePath("../Attack3")
 [node name="Attack3" type="Node" parent="StateMachine"]
 script = ExtResource("20_ccctb")
 decelerate_speed = 8.0
+lunge_speed = 150.0
 
 [node name="Dodge" type="Node" parent="StateMachine"]
 script = ExtResource("16_k84mv")
@@ -1636,18 +1637,9 @@ script = ExtResource("16_k84mv")
 z_index = -1
 max_polyphony = 10
 
-[node name="FootstepsAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="FootstepAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_5jkry")
 volume_db = -20.0
 bus = &"SFX"
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_0ltfw")
-emitting = false
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_ovycf")
-texture = ExtResource("21_ap6va")
-one_shot = true
-local_coords = true
 
 [connection signal="animation_finished" from="Player/PlayerAnims" to="." method="_on_player_anims_animation_finished"]
