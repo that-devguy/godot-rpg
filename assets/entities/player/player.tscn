@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://xu3diojofdex"]
+[gd_scene load_steps=51 format=3 uid="uid://xu3diojofdex"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3n50m"]
 [ext_resource type="Texture2D" uid="uid://chstvmkisd1hq" path="res://assets/tilesets/shadow.png" id="2_dr8wy"]
@@ -1513,6 +1513,16 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_yoemf"]
 radius = 3.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0ltfw"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ovycf"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -1, 0)
+
 [node name="Player" type="CharacterBody2D"]
 z_as_relative = false
 y_sort_enabled = true
@@ -1632,6 +1642,12 @@ volume_db = -20.0
 bus = &"SFX"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_0ltfw")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ovycf")
 texture = ExtResource("21_ap6va")
+one_shot = true
+local_coords = true
 
 [connection signal="animation_finished" from="Player/PlayerAnims" to="." method="_on_player_anims_animation_finished"]
