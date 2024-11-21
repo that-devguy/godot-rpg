@@ -22,11 +22,7 @@ func Enter() -> void:
 		dodge_direction = "dodge_" + player.AnimDirection()
 		player.direction = (player.get_global_mouse_position() - player.global_position).normalized()
 	else:
-		# While walking dodge direction based on input vector (Joystick friendly)
-		if abs(player.direction.x) > abs(player.direction.y):
-			dodge_direction = "dodge_left" if player.direction.x < 0 else "dodge_right"
-		else:
-			dodge_direction = "dodge_up" if player.direction.y < 0 else "dodge_down"
+		player.UpdateAnim("dodge")
 	
 	dodging = true
 	_timer = dodge_duration

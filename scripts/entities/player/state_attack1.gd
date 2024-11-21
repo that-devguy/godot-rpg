@@ -13,6 +13,7 @@ class_name State_Attack1 extends State
 @onready var weapon_sprite: Sprite2D = $"../../Player/WeaponHolder/Weapon"
 @onready var weapon_holder: Node2D = $"../../Player/WeaponHolder"
 @onready var weapon_anims: AnimationPlayer = $"../../Player/WeaponHolder/Weapon/WeaponAnims"
+@onready var audio_player: AudioStreamPlayer2D = $"../../AudioStreamPlayer2D"
 
 var attacking : bool = false
 var attack_queued: bool = false
@@ -32,6 +33,10 @@ func Enter() -> void:
 	attack_hurt_box.source_state = self
 	attacking = true
 	attack_queued = false
+	
+	# Play attack sound with random pitch
+	audio_player.pitch_scale = randf_range(0.1, 4)
+	audio_player.play()
 	
 	# Schedule the lunge for frame 6
 	await get_tree().create_timer(0.375).timeout
