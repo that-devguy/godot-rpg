@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://4psu8lvt6uux"]
+[gd_scene load_steps=8 format=3 uid="uid://4psu8lvt6uux"]
 
-[ext_resource type="PackedScene" uid="uid://gfbasxh4cjaq" path="res://assets/tilesets/test_map.tscn" id="1_k8l14"]
 [ext_resource type="PackedScene" uid="uid://xu3diojofdex" path="res://assets/entities/player/player.tscn" id="2_hgsgl"]
-[ext_resource type="PackedScene" uid="uid://pky7lwirm65r" path="res://assets/tilesets/shock_01.tscn" id="2_n0doy"]
+[ext_resource type="PackedScene" uid="uid://pky7lwirm65r" path="res://assets/tilesets/denial_01.tscn" id="2_n0doy"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_thicu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_shvop"]
 [ext_resource type="PackedScene" uid="uid://ddaid4ggtx6lm" path="res://assets/entities/enemies/bat/bat.tscn" id="5_xtn1o"]
@@ -14,29 +13,26 @@ transition = 0
 ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6xjw"]
-size = Vector2(560, 416)
+size = Vector2(2656, 1520)
 
 [node name="world" type="Node2D"]
 
-[node name="test_map" parent="." instance=ExtResource("1_k8l14")]
-visible = false
+[node name="denial_01" parent="." instance=ExtResource("2_n0doy")]
 
-[node name="Shock_01" parent="." instance=ExtResource("2_n0doy")]
+[node name="player" parent="denial_01" instance=ExtResource("2_hgsgl")]
+position = Vector2(255, 576)
 
-[node name="player" parent="Shock_01" instance=ExtResource("2_hgsgl")]
-position = Vector2(37, 156)
+[node name="Bat" parent="denial_01" instance=ExtResource("5_xtn1o")]
+position = Vector2(621, 259)
 
-[node name="Bat" parent="Shock_01" instance=ExtResource("5_xtn1o")]
-position = Vector2(340, 160)
+[node name="Bat2" parent="denial_01" instance=ExtResource("5_xtn1o")]
+position = Vector2(622, 182)
 
-[node name="Bat2" parent="Shock_01" instance=ExtResource("5_xtn1o")]
-position = Vector2(319, 114)
+[node name="Bat3" parent="denial_01" instance=ExtResource("5_xtn1o")]
+position = Vector2(656, 166)
 
-[node name="Bat3" parent="Shock_01" instance=ExtResource("5_xtn1o")]
-position = Vector2(369, 112)
-
-[node name="PhantomCamera2D" type="Node2D" parent="Shock_01" node_paths=PackedStringArray("follow_target")]
-position = Vector2(176, 156)
+[node name="PhantomCamera2D" type="Node2D" parent="denial_01" node_paths=PackedStringArray("follow_target")]
+position = Vector2(255, 576)
 scale = Vector2(0.90242, 1.18341)
 script = ExtResource("3_thicu")
 follow_mode = 5
@@ -51,6 +47,6 @@ limit_target = NodePath("../../camera_bounds/CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="camera_bounds"]
 visible = false
-position = Vector2(264, 160)
+position = Vector2(1328, 760)
 shape = SubResource("RectangleShape2D_l6xjw")
 disabled = true
