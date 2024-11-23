@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://xu3diojofdex"]
+[gd_scene load_steps=54 format=3 uid="uid://xu3diojofdex"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3n50m"]
 [ext_resource type="Texture2D" uid="uid://chstvmkisd1hq" path="res://assets/tilesets/shadow.png" id="2_dr8wy"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://scripts/entities/player/state_attack2.gd" id="19_nrpug"]
 [ext_resource type="Script" path="res://scripts/entities/player/state_attack3.gd" id="20_ccctb"]
 [ext_resource type="Texture2D" uid="uid://cyvvvsnhb4k6a" path="res://assets/entities/player/dust_blob.png" id="21_ap6va"]
+[ext_resource type="Texture2D" uid="uid://bitpxmnmf2s44" path="res://assets/light.png" id="22_6634e"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n5d3j"]
 particles_animation = true
@@ -107,7 +108,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 0)]
+"values": [Vector2i(0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_62xih"]
@@ -844,7 +845,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(7, -1.02)]
+"values": [Vector2(7, -2)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -856,7 +857,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.191986]
+"values": [0.0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1448,6 +1449,7 @@ texture = ExtResource("2_dr8wy")
 offset = Vector2(0, -6)
 
 [node name="FootstepParticles" type="GPUParticles2D" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_n5d3j")
 emitting = false
 amount = 1
@@ -1463,6 +1465,7 @@ texture = SubResource("CompressedTexture2D_ewkft")
 offset = Vector2(0, -6)
 hframes = 6
 vframes = 2
+frame = 6
 
 [node name="PlayerAnims" type="AnimationPlayer" parent="Player"]
 root_node = NodePath("../..")
@@ -1476,8 +1479,7 @@ y_sort_enabled = true
 position = Vector2(0, -2.98)
 
 [node name="Weapon" type="Sprite2D" parent="Player/WeaponHolder"]
-position = Vector2(7, -1.02)
-rotation = 0.191986
+position = Vector2(7, -2)
 texture = ExtResource("13_uuay7")
 offset = Vector2(-7, -1)
 
@@ -1563,5 +1565,11 @@ max_polyphony = 10
 stream = ExtResource("8_5jkry")
 volume_db = -12.0
 bus = &"SFX"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("22_6634e")
+texture_scale = 0.5
 
 [connection signal="animation_finished" from="Player/PlayerAnims" to="." method="_on_player_anims_animation_finished"]

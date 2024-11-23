@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://4psu8lvt6uux"]
+[gd_scene load_steps=10 format=3 uid="uid://4psu8lvt6uux"]
 
 [ext_resource type="PackedScene" uid="uid://xu3diojofdex" path="res://assets/entities/player/player.tscn" id="2_hgsgl"]
 [ext_resource type="PackedScene" uid="uid://pky7lwirm65r" path="res://assets/tilesets/denial_01.tscn" id="2_n0doy"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_thicu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_shvop"]
 [ext_resource type="PackedScene" uid="uid://ddaid4ggtx6lm" path="res://assets/entities/enemies/bat/bat.tscn" id="5_xtn1o"]
+[ext_resource type="Texture2D" uid="uid://bitpxmnmf2s44" path="res://assets/light.png" id="6_810aq"]
 
 [sub_resource type="Resource" id="Resource_e3km2"]
 script = ExtResource("4_shvop")
@@ -14,6 +15,10 @@ ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6xjw"]
 size = Vector2(2656, 1520)
+
+[sub_resource type="Gradient" id="Gradient_kyael"]
+offsets = PackedFloat32Array(0, 0.218447, 1)
+colors = PackedColorArray(0, 0.983249, 1, 0, 0, 0.991768, 1, 0.866667, 1, 1, 1, 0)
 
 [node name="world" type="Node2D"]
 
@@ -50,3 +55,65 @@ visible = false
 position = Vector2(1328, 760)
 shape = SubResource("RectangleShape2D_l6xjw")
 disabled = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.222473, 0.47522, 0.554309, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 5
+position = Vector2(348, 815)
+amount = 200
+lifetime = 4.0
+emission_shape = 3
+emission_rect_extents = Vector2(350, 400)
+direction = Vector2(1, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 25.0
+damping_min = 2.0
+damping_max = 5.0
+color_ramp = SubResource("Gradient_kyael")
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
+position = Vector2(200, 504)
+color = Color(0.309281, 0.63956, 1, 1)
+energy = 0.3
+texture = ExtResource("6_810aq")
+texture_scale = 0.2
+
+[node name="PointLight2D6" type="PointLight2D" parent="Lighting"]
+position = Vector2(168, 503)
+color = Color(0.309281, 0.63956, 1, 1)
+energy = 0.3
+texture = ExtResource("6_810aq")
+texture_scale = 0.2
+
+[node name="PointLight2D7" type="PointLight2D" parent="Lighting"]
+position = Vector2(201, 616)
+color = Color(0.309281, 0.63956, 1, 1)
+energy = 0.3
+texture = ExtResource("6_810aq")
+texture_scale = 0.2
+
+[node name="PointLight2D8" type="PointLight2D" parent="Lighting"]
+position = Vector2(425, 568)
+color = Color(0.309281, 0.63956, 1, 1)
+energy = 0.3
+texture = ExtResource("6_810aq")
+texture_scale = 0.2
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lighting"]
+position = Vector2(360, 565)
+color = Color(0.309281, 0.63956, 1, 1)
+energy = 0.3
+texture = ExtResource("6_810aq")
+texture_scale = 0.2
+
+[node name="PointLight2D5" type="PointLight2D" parent="Lighting"]
+position = Vector2(392, 518)
+color = Color(0.309281, 0.63956, 1, 1)
+energy = 0.3
+texture = ExtResource("6_810aq")
+texture_scale = 0.2
